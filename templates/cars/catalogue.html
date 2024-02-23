@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    {% if profile and not cars %}
+        <p class="no-articles">No cars yet</p>
+    {% endif %}
+
+    {% if profile and cars %}
+        <section id="catalogue">
+        <h1>Total cars: {{ cars_count }}</h1>
+
+        {% for car in cars %}
+
+            <div class="car-card">
+                <div class="image-wrap">
+                    <img src="{{ car.image_url }}"
+                         alt="{{ car.type }}"
+                    />
+                </div>
+                <!-- car type -->
+                <h3>{{ car.type }}</h3>
+                <!-- car model -->
+                <h1>{{ car.model }}</h1>
+                <div class="details-buttons">
+                    <!-- car details button -->
+                    <a href="{% url 'details_car' pk=car.pk %}" class="details-btn">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</section>
+{% endblock %}
